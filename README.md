@@ -1,10 +1,10 @@
 # pass2keep
 
-Export passwork vaults to keepass.
+Export [passwork](https://passwork.pro/) vaults to keepass.
 
 ## Usage
 
-* Self hostet passwork instance ()
+* Self hostet passwork instance (https://passwork.pro/)
 * git (optional)
 * node >= 12
 * yarn or npm
