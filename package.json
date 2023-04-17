@@ -1,0 +1,13 @@
+{
+  "name": "pass2keep",
+  "version": "0.0.1",
+  "description": "create new keepass dbx from passwork vaults export",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "argon2": "^0.30.3",
+    "dotenv": "^16.0.3",
+    "kdbxweb": "^2.1.1",
+    "passwork-js": "https://github.com/passwork-me/js-connector.git"
+  }
+}
