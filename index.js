@@ -48,6 +48,7 @@ const createEntry = async (pw, group) => {
               entry.binaries.set(attachment.name, data);
             }
             catch(e) {
+              console.log("2nd try to download '" +  attachment.name + "' from password '" + pw.name + "'")
               try {
                 // second try (see issue https://github.com/passwork-me/js-connector/issues/25)
                 const data = await attachment.getData();
