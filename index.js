@@ -44,13 +44,13 @@ const createEntry = async (pw, group) => {
             const attachment = await passwork.getAttachment(pw.id, pw.attachments.shift().id)
             try {
               // first try
-              const data = attachment.getData();
+              const data = await attachment.getData();
               entry.binaries.set(attachment.name, data);
             }
             catch(e) {
               try {
-                // second try
-                const data = attachment.getData();
+                // second try (see issue https://github.com/passwork-me/js-connector/issues/25)
+                const data = await attachment.getData();
                 entry.binaries.set(attachment.name, data);
               }
               catch(e) {
@@ -103,7 +103,6 @@ const passwork = new PassworkAPI(config.passwork_url);
 const credentials = new kdbxweb.Credentials(kdbxweb.ProtectedValue.fromString(config.keepass_password));
 const keepass = kdbxweb.Kdbx.create(credentials, 'export');
 
-
 (async () => {
     // passwork login
     if (config.passwork_masterpass !== null) {
@@ -113,11 +112,14 @@ const keepass = kdbxweb.Kdbx.create(credentials, 'export');
         await passwork.login(config.passwork_token);
     }
 
+    // which vaults are to be transferred.
     const vaults = await passwork.getVaults().then(data => {
-        return config.passwork_vault ? data.filter(item => item.name === config.passwork_vault) : data
+      const need = config.passwork_vaults;
+      return (need.length) ? data.filter(item => need.includes(item.name)) : data;
     });
 
-    while(vaults.length) {
+    if (vaults.length) {
+      while(vaults.length) {
         const vault = vaults.shift();
         // new keepass group
         const group = keepass.createGroup(keepass.getDefaultGroup(), vault.name);
@@ -127,13 +129,21 @@ const keepass = kdbxweb.Kdbx.create(credentials, 'export');
 
         const folders = await passwork.getFolders(vault.id);
         await importFolders(folders, group);
+      }
+
+      // create new kdbx file
+      const buffer = await keepass.save();
+      fs.writeFileSync(config.keepass_file, Buffer.from(buffer));
+    }
+    else {
+      console.log("No Vaults found!")
+      if (config.passwork_vaults.length) {
+        console.log("Check your PASSWORK_VAULTS: " + JSON.stringify(config.passwork_vaults));
+      }
     }
 
   // quit passwork session
   await passwork.logout();
 
-  // create new kdbx file
-  const buffer = await keepass.save();
-  fs.writeFileSync(config.keepass_file, Buffer.from(buffer));
 
 })();
