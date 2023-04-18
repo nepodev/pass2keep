@@ -24,7 +24,7 @@ Configuration must be passed through environment variables. You can also use an 
 * `PASSWORK_URL` URL to the Passwork instance
 * `PASSWORK_TOKEN` Personal API Key
 * `PASSWORK_MASTERPASS` (optional) If you are using a client side encryption.
-* `PASWORK_VAULTS` (optional) Vaults to Export. If no vaults are given, all vaults will be exported. 
+* `PASSWORK_VAULTS` (optional) Vaults to Export. If no vaults are given, all vaults will be exported. 
 * `KEEPASS_PASSWORD` Password for keepass database
 * `KEEPASS_FILE` Full filepath to the new kdbx-file.
 
