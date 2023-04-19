@@ -35,7 +35,7 @@ Configuration must be passed through environment variables. You can also use an 
 PASSWORK_URL=https://passwork.example.com/api/v4 \
 PASSWORK_TOKEN="MyPersonalToken" \
 KEEPASS_PASSWORD=MyVerySecretSecret \
-PASSWORK_ZIP_PASS="/path/to/my/export.kdbx" \
+KEEPASS_FILE="/path/to/my/export.kdbx" \
 node /opt/pass2keep/index.js
 ```
 
