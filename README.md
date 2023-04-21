@@ -2,7 +2,7 @@
 
 Export [passwork](https://passwork.pro/) vaults to keepass. The need was to create a daily cron job that makes a local backup of my vaults.  
 
-## Usage
+## Requirements
 
 * Self hostet passwork instance (https://passwork.pro/)
 * git (optional)
