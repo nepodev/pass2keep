@@ -55,7 +55,7 @@ const createEntry = async (pw, group) => {
                 entry.binaries.set(attachment.name, data);
               }
               catch(e) {
-                console.log("Unable to get attachment '" + attachment.name + "' from password '" + pw.name + "'")
+                console.error("Unable to get attachment '" + attachment.name + "' from password '" + pw.name + "'")
                 console.error(e)
               }
             }
