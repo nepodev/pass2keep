@@ -6,7 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "argon2": "^0.30.3",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.1.3",
     "kdbxweb": "^2.1.1",
     "passwork-js": "https://github.com/passwork-me/js-connector.git"
   }
